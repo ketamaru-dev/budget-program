@@ -11,9 +11,19 @@ class MyTypeError(TypeError):
 
 
 class WrongInput(Exception):
-    def __init__(self, var):
+    def __init__(self, var=None):
         super().__init__(self)
         self.exc_var = var
     
     def __str__(self):
-        print(f'Error is occured, enter {self.exc_var} is wrong! Try again!')
+        if not self.exc_var == None:
+            print(f'Error is occured, enter {self.exc_var} is wrong! Try again!')
+        else:
+            print(f'Error is occured. Try again!')
+
+class CreateError(Exception):
+    def __init__(self):
+        super().__init__(self)
+    
+    def __str__(self):
+        print('---Error of file create---')

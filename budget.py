@@ -10,7 +10,6 @@ class Category:
 #         self.category name - stores name of category
 #         self.limit - stores limit of category
 
-#initializing category
     def __init__(self, name_of_category: str, limit: float):
         
         #check type of name_of_category var (must be str)
@@ -70,6 +69,14 @@ class Category:
                 raise WrongInput(need)
         except WrongInput:
             self.show_all_transactions(all_transaction)
+
+    def pack_to_save(self):
+        packed_category = {
+            'category name': self.category_name,
+            'limit': self.limit,
+            'transactions': self.transaction
+        }
+        return packed_category
 
 class Transaction:
 
