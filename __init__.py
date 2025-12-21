@@ -20,21 +20,27 @@ import json
 #}
 
 
-def touch_file(file_path='.'):
+def is_file_exists(file_path='.'):  #check in while first try
     try:
         with open(f'{file_path}\\budget_base.json', 'r') as file:
-            return None
-            
+            return True       
     except FileNotFoundError:
-        isCreate = input('File not found, do you want to create it? (y/n)')
-        if isCreate.lower() == 'y':
-            with open(f'{file_path}\\budget_base.json', 'w') as file:
-                fill_the_budget_file()
-                print('File created!')
-                return None
-        else:
-            raise CreateError
+            return False
         
+        
+# def toch_file(file_path='.'):  #check in while first try
+#     try:
+#         with open(f'{file_path}\\budget_base.json', 'r') as file:
+#             return True       
+#     except FileNotFoundError:
+#         isCreate = input('File not found, do you want to create it? (y/n)')
+#         if isCreate.lower() == 'y':
+#             with open(f'{file_path}\\budget_base.json', 'w') as file:
+#                 fill_the_budget_file()
+#                 print('File created!')
+#                 return None
+#         else:
+#             raise CreateError
         
 
 def fill_the_budget_file(file_path='.'):
@@ -77,6 +83,23 @@ def init_category() -> Category:
     print('Category created!')
     return new_category
 
+def create_file(file_path='.'):
+    with open(f'{file_path}\\budget_base.json', 'w') as file:
+        print('File created!')
+        fill_file = input("Do you wanna fill the file:\n")
+        while True:
+            if fill_file.lower() == 'y':
+                fill_the_budget_file(file_path)
+                break
+            elif fill_file.lower() == 'n':
+                print('file will be empty!')
+                break
+            else:
+                continue
 
-if __name__ == '__main__':
-    pass
+is_exist = is_file_exists()
+if is_exist:
+    #read file
+    load_fudget_file()
+else:
+    create_file()
